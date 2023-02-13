@@ -1,7 +1,7 @@
 /***************************************************************
  * Objetivo: Arquivo de funções para calcular uuma tabuada
  * Data: 06/02/2023
- * Autora: Yasmin Gonçalves
+ * Autora: Felipe Graciano
  * Versão: 1.0
  ***************************************************************/
 

@@ -1,15 +1,54 @@
 /**************************************************************************************
  * Objetivo: Arquivo de funções para cálculo de média.
  * Data: 10/02/2023
- * Autora: Yasmin Gonçalves
+ * Autora: Felipe Graciano
  * Versão: 1.0  
  **************************************************************************************/
+
+
+const tratamentoDoAluno = function (studentSex) {
+    let sexoAluno = studentSex;
+
+    if(sexoAluno == 'FEMININO' || sexoAluno == '1'){
+        sexoAluno = 'a';
+        return sexoAluno;
+    } else if(sexoAluno == 'MASCULINO' || sexoAluno == '2'){
+        sexoAluno = 'o';
+        return sexoAluno;
+    } else if  (sexoAluno == ''){
+        console.log('ERRO: Por favor digite o seu gênero')
+        return false
+    } else{
+        console.log('ERRO: por favor escolha uma opção válidaMikeTyson')
+        return false
+    } 
+}
+
+const tratamentoDoProfessor = function (teacherSex){
+    let sexoDoProfessor = teacherSex;
+
+    if(sexoDoProfessor == 'FEMININO' || sexoDoProfessor == '1'){
+        sexoDoProfessor = 'da Professora';
+        return sexoDoProfessor;
+    } else if (sexoDoProfessor == 'MASCULINO' || sexoDoProfessor == '2'){
+        sexoDoProfessor = 'do Professor';
+        return sexoDoProfessor;
+    } else if(sexoDoProfessor == ''){
+        console.log('ERRO: Por favor digite o gênero do seu professor')
+        return false
+    } else {
+        console.log('ERRO: por favor escolha uma opção válidaOHWTH')
+        return false
+    }
+}
+
 
 const calcularMedia = function (primeiraNota, segundaNota, terceiraNota, quartaNota) {
     let nota1 = Number(String(primeiraNota))
     let nota2 = Number(String(segundaNota))
     let nota3 = Number(String(terceiraNota))
     let nota4 = Number(String(quartaNota))
+    let status;
 
 
     if (nota1 < 0 || nota2 < 0 || nota3 < 0 || nota4 < 0 || nota1 > 100 || nota2 > 100 || nota3 > 100 || nota4 > 100) {
@@ -22,27 +61,32 @@ const calcularMedia = function (primeiraNota, segundaNota, terceiraNota, quartaN
         let resultado = (nota1 + nota2 + nota3 + nota4) / 4
 
         if (resultado >= 70) {
-            console.log(resultado + ' Aprovado')
+            status = 'Aprovado';
+            return status;
         } else if (resultado >= 50 && resultado <= 69) {
-            return true
+            status = 'dependente da nota no Exame Final';
+            return status;
         } else {
-            console.log(resultado + ' Reprovado')
+            status = 'reprovado';
+            return status;
         }
     }
 }
 
 const calcularMediaExame = function (primeiraNota, segundaNota, terceiraNota, quartaNota, exame) {
-    let nota1 = Number(String(primeiraNota))
-    let nota2 = Number(String(segundaNota))
-    let nota3 = Number(String(terceiraNota))
-    let nota4 = Number(String(quartaNota))
-    let notaExame = Number(String(exame))
+    let nota1 = Number(primeiraNota)
+    let nota2 = Number(segundaNota)
+    let nota3 = Number(terceiraNota)
+    let nota4 = Number(quartaNota)
+    let notaExame = Number(exame)
+    let status;
 
 
     let mediaComExame
 
     mediaComExame = (nota1 + nota2 + nota3 + nota4 + notaExame) / 5
 
+    
     if (notaExame > 100 || notaExame < 0) {
         console.log('ERRO: Digite um valor válido')
     } else if (notaExame === '') {
@@ -51,16 +95,19 @@ const calcularMediaExame = function (primeiraNota, segundaNota, terceiraNota, qu
         console.log('ERRO: Digite um valor válido.')
     } else {
         if (mediaComExame < 60) {
-            console.log('Aluno reprovado\nMédia: ' + mediaComExame)
+            status = false
         } else {
-            console.log('Aluno aprovado\nMédia: ' + mediaComExame)
+            status = true
         }
     }
 
 
+    return status
 }
 
 module.exports = {
     calcularMedia,
-    calcularMediaExame
+    calcularMediaExame,
+    tratamentoDoAluno,
+    tratamentoDoProfessor
 }

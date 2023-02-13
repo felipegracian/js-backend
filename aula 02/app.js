@@ -1,6 +1,6 @@
 /******************************************************************************
  * Objetivo:  Calcular a média de quatro notas escolares
- * Autora: Yasmin Gonçalves
+ * Autora: Felipe Graciano
  * Data: 27/01/2023
  * Versão: 1.0
  ******************************************************************************/

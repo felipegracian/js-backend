@@ -1,6 +1,6 @@
 /*********************************************************************************************
  * Objetivo:  Realizar cálculos com entrada de dois valores com as 4 operações matemáticas.
- * Autora: Yasmin Gonçalves
+ * Autora: Felipe Graciano
  * Data: 30/01/2023
  * Versão: 1.0
  ********************************************************************************************/
