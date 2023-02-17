@@ -8,7 +8,7 @@
 var calculoMedia = require('./modulo/calculoMedia.js')
 
 var readLine = require('readline')
-const { calcularMediaExame, tratamentoDoAluno } = require('./modulo/calculoMedia.js')
+const { calcularMedia, calcularMediaExame, tratamentoDoAluno } = require('./modulo/calculoMedia.js')
 
 var entradaDados = readLine.createInterface({
     input: process.stdin,
@@ -27,7 +27,7 @@ entradaDados.question('Nome do aluno (a):\n', function (studentName) {
             entradaDados.question('Digite o genero do (a) professor (a) 1-feminino 2-masculino\n', function (teacherSex) {
                 let sexoProfessor = teacherSex.toUpperCase();
 
-                if(sexoProfessor == ''){
+                if (sexoProfessor == '') {
                     console.log('ERRO: Por favor digite o gênero do seu Professor(a)')
                 }
 
@@ -53,33 +53,105 @@ entradaDados.question('Nome do aluno (a):\n', function (studentName) {
                                         let valor4 = quartaNota
                                         let resultado
 
-                                        resultado = calculoMedia.calcularMedia(valor1, valor2, valor3, valor4)
+                                        //resultado = calculoMedia.calcularMedia(valor1, valor2, valor3, valor4)
 
-                                        console.log(calculoMedia.tratamentoDoAluno(sexoAluno) +
-                                         'lun' +
-                                         calculoMedia.tratamentoDoAluno(sexoAluno) +
-                                         ' ' +
-                                          nomeAluno +
-                                          ' está ' +
-                                            resultado +
-                                            ' na matéria ' +
-                                             calculoMedia.tratamentoDoProfessor(sexoProfessor) +
-                                              ' ' +
-                                               nomeProfessor)
 
-                                        if (status = 'dependente da nota no Exame Final') {
-                                            entradaDados.question('Digite a nota do exame:\n', function (exame) {
-                                                let notaExame = exame
-                                                let exameNecessario
-                                                exameNecessario = calculoMedia.calcularMediaExame(valor1, valor2, valor3, valor4, notaExame)
-                                                console.log(exameNecessario)
-                                                if(exameNecessario == false){
-                                                    console.log('Reprovado')
-                                                } else{
-                                                    console.log('Mike Tyson')
+                                        if (valor1 < 0 || valor2 < 0 || valor3 < 0 || valor4 < 0 || valor1 > 100 || valor2 > 100 || valor3 > 100 || valor4 > 100) {
+                                            console.log('ERRO: Digite uma nota válida (entre 0 e 100).')
+                                        } else if (valor1 === '' || valor2 === '' || valor3 === '' || valor4 === '') {
+                                            console.log('ERRO: Digite um valor. snfajfhhj');
+                                        } else if (isNaN(valor1) || isNaN(valor2) || isNaN(valor3) || isNaN(valor4)) {
+                                            console.log('ERRO: Digite um valor válido');
+                                        } else {
+                                            let media = calculoMedia.calcularMedia(valor1, valor2, valor3, valor4)
+                                            if (media < 60) {
+                                                entradaDados.question('Sua média final está dependente da sua nota do exame. Qual foi sua nota no exame? \n', function (exame) {
+                                                    let notaExame = exame
+                                                    let mediaComExame = calculoMedia.calcularMediaExame(valor1, valor2, valor3, valor4, notaExame)
+                                                    if (mediaComExame >= 60) {
+                                                        console.log(calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                            ' alun' +
+                                                            calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                            ' ' +
+                                                            nomeAluno +
+                                                            ' está ' +
+                                                            'Aprovad' +
+                                                            calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                            ' na matéria ' +
+                                                            nomeDisciplina +
+                                                            '\n' +
+                                                            'Curso: ' + nomeCurso +
+                                                            '' +
+                                                            calculoMedia.tratamentoDoProfessor + '' + nomeProfessor +
+                                                            '\n Notas do Aluno: ' + valor1 + ',' + valor2 + ',' + valor3 + ',' + valor4 + notaExame +
+                                                            '\n Média final: ' + mediaComExame)
+                                                    } else {
+                                                        console.log(calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                            ' alun' +
+                                                            calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                            ' ' +
+                                                            nomeAluno +
+                                                            ' está ' +
+                                                            'Reprovad' +
+                                                            calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                            ' na matéria ' +
+                                                            nomeDisciplina +
+                                                            '\n' +
+                                                            'Curso: ' + nomeCurso +
+                                                            '' +
+                                                            calculoMedia.tratamentoDoProfessor + '' + nomeProfessor +
+                                                            '\n Notas do Aluno: ' + valor1 + ',' + valor2 + ',' + valor3 + ',' + valor4 + ',' + notaExame +
+                                                            '\n Média final: ' + mediaComExame)
+                                                    }
                                                 }
-                                            })
+                                                )
+                                            } else if(media < 50) {
+                                                console.log(calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                    ' alun' +
+                                                    calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                    ' ' +
+                                                    nomeAluno +
+                                                    ' está ' +
+                                                    'Reprovad' +
+                                                    calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                    ' na matéria ' +
+                                                    '' +
+                                                    nomeDisciplina +
+                                                    '\n' +
+                                                    'Curso: ' + nomeCurso +
+                                                    '' +
+                                                    calculoMedia.tratamentoDoProfessor + '' + nomeProfessor +
+                                                    '\n Notas do Aluno: ' + valor1 + ',' + valor2 + ',' + valor3 + ',' + valor4 +
+                                                    '\n Média final: ' + media)
+                                            } else{
+                                                console.log(calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                    ' alun' +
+                                                    calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                    ' ' +
+                                                    nomeAluno +
+                                                    ' está ' +
+                                                    'Aprovad' +
+                                                    calculoMedia.tratamentoDoAluno(sexoAluno) +
+                                                    ' na matéria ' +
+                                                    '' +
+                                                    nomeDisciplina +
+                                                    '\n' +
+                                                    'Curso: ' + nomeCurso +
+                                                    '' +
+                                                    calculoMedia.tratamentoDoProfessor + '' + nomeProfessor +
+                                                    '\n Notas do Aluno: ' + valor1 + ',' + valor2 + ',' + valor3 + ',' + valor4 +
+                                                    '\n Média final: ' + media)
+                                            }
                                         }
+
+
+
+
+
+
+
+
+
                                     })
                                 })
                             })
